@@ -1,0 +1,17 @@
+***Responssável por configurar o processo de build do projeto, indicando quais arquivos devem ser compilados e linkados 
+
+cmake_minimum_required(VERSION 3.21) **garante que a versão correta do cmake será utilizada para a compilar o projeto
+
+include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake) **importa todas as configurações necessárias para compilar a aplicação (caminhoSDK do raspiberry pico)
+
+project(pico-projects C CXX ASM) ***define o nome do projeto e indica quais linguagens serão utilizadas que são suportadas pelo sdk
+
+pico_sdk_init() **garante que todas as bibliotecas e dependências estejam corretamente configuradas 
+
+add_executable(blink **adiciona o execultável ao projeto
+    blink.c **gerado a partir desse arquivo
+)
+
+target_link_libraries(blink pico_stdlib) **para linkar as bibliotecas necessárias
+
+pico_add_extra_outputs(blink) **define que deve ser geradoos arquivos UF2 e BIN na saída da compilação
